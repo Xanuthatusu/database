@@ -37,8 +37,8 @@ class GTKGUI:
 		and self.lastNameEntry.get_text() != "" \
 		and self.phoneNumEntry.get_text() != "" \
 		and self.emailEntry.get_text() != "":
-			self.DATA.add(self.firstNameEntry.get_text(), (self.firstNameEntry.get_text(), 
-				self.lastNameEntry.get_text(), self.phoneNumEntry.get_text(), self.emailEntry.get_text()))
+			self.DATA.addUser((self.firstNameEntry.get_text(), self.lastNameEntry.get_text(),
+                            self.phoneNumEntry.get_text(), self.emailEntry.get_text()))
 
 		elif data:
 			dialog = gtk.Dialog("Error")
@@ -59,22 +59,21 @@ class GTKGUI:
 	# deletes if they wanted to, doesn't if they didn't
 	def delAnswer(self, widget, data):
 		if data == "yes":
-			self.DATA.remove(self.DATA.userList[self.curUser][1])
+			self.DATA.remUser([self.DATA.userList[self.curUser][0], self.DATA.userList[self.curUser][1],
+                            self.DATA.userList[self.curUser][2], self.DATA.userList[self.curUser][3]])
 			self.next(None)
-		else:
-			pass
 
 	# changes the data to the previous feild in the database
 	def previous(self, widget):
 		try:
 			self.curUser -= 1
-			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][1])
+			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][0])
 		except:
 			self.curUser = len(self.DATA.userList)-1
-			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][1])
-		self.lastNameLabel.set_text(self.DATA.userList[self.curUser][2])
-		self.phoneNumLabel.set_text(self.DATA.userList[self.curUser][3])
-		self.emailLabel.set_text(self.DATA.userList[self.curUser][4])
+			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][0])
+		self.lastNameLabel.set_text(self.DATA.userList[self.curUser][1])
+		self.phoneNumLabel.set_text(self.DATA.userList[self.curUser][2])
+		self.emailLabel.set_text(self.DATA.userList[self.curUser][3])
 
 	# dialog box asking the user if they're sure they mean't to press delete
 	def delete(self, widget):
@@ -158,13 +157,13 @@ class GTKGUI:
 	def next(self, widget):
 		try:
 			self.curUser += 1
-			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][1])
+			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][0])
 		except:
 			self.curUser = 0
-			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][1])
-		self.lastNameLabel.set_text(self.DATA.userList[self.curUser][2])
-		self.phoneNumLabel.set_text(self.DATA.userList[self.curUser][3])
-		self.emailLabel.set_text(self.DATA.userList[self.curUser][4])
+			self.firstNameLabel.set_text(self.DATA.userList[self.curUser][0])
+		self.lastNameLabel.set_text(self.DATA.userList[self.curUser][1])
+		self.phoneNumLabel.set_text(self.DATA.userList[self.curUser][2])
+		self.emailLabel.set_text(self.DATA.userList[self.curUser][3])
 
 	# the main method
 	def __init__(self, DATA):
@@ -205,16 +204,16 @@ class GTKGUI:
 		self.box = gtk.VBox()
 
 		# initiatlly setting the values for each label
-		self.firstNameLabel = gtk.Label(self.DATA.userList[self.curUser][1])
+		self.firstNameLabel = gtk.Label(self.DATA.userList[self.curUser][0])
 		self.box.pack_start(self.firstNameLabel)
 
-		self.lastNameLabel = gtk.Label(self.DATA.userList[self.curUser][2])
+		self.lastNameLabel = gtk.Label(self.DATA.userList[self.curUser][1])
 		self.box.pack_start(self.lastNameLabel)
 
-		self.phoneNumLabel = gtk.Label(self.DATA.userList[self.curUser][3])
+		self.phoneNumLabel = gtk.Label(self.DATA.userList[self.curUser][2])
 		self.box.pack_start(self.phoneNumLabel)
 
-		self.emailLabel = gtk.Label(self.DATA.userList[self.curUser][4])
+		self.emailLabel = gtk.Label(self.DATA.userList[self.curUser][3])
 		self.box.pack_start(self.emailLabel)
 
 		# packing and reseting the value of self.box

@@ -13,7 +13,7 @@
 import pygtk
 pygtk.require("2.0")
 import gtk
-import gtkgui, data
+import gtkgui, data_mysql
 
 # main class to execute and start gtk
 def main():
@@ -21,6 +21,6 @@ def main():
 
 # creates class objects and starts the gui
 if __name__ == "__main__":
-	DATA = data.Data()
+	DATA = data_mysql.Data()
 	GUI = gtkgui.GTKGUI(DATA)
 	main()
