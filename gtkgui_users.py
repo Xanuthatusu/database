@@ -174,7 +174,7 @@ class GTKGUI:
 		# initiate variables and window object
 		self.curUser = 0
 		self.window = gtk.Window()
-		self.window.set_title("Dictionary")
+		self.window.set_title("Movie Database")
 		self.window.set_position(gtk.WIN_POS_CENTER)
 		#self.window.set_size_request(400,125)
 		self.window.connect("delete_event", self.delete_event)
